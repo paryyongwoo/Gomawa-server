@@ -25,7 +25,8 @@ public class MyThanksController {
     @Autowired
     private MemberRepository memberRepository;
 
-    @RequestMapping(
+
+/*    @RequestMapping(
             value= "/api/dailyThanks",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE
@@ -36,5 +37,6 @@ public class MyThanksController {
         dailyThanksParam.setMember(regMember);
         DailyThanks dailyThanks = myThanksService.addDailyThanks(dailyThanksParam);
         return ResponseEntity.ok(dailyThanks);
-    }
+    }*/
+
 }

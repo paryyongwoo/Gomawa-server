@@ -20,7 +20,9 @@ public class Member {
     private Long key;
     private String email;
     private String gender;
+    private String nickName;
     private LocalDateTime regDate;
+
     @OneToOne
     @JoinColumn(name = "SETTING_ID")
     private Setting setting;
@@ -33,6 +35,7 @@ public class Member {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", gender='" + gender + '\'' +
+                ", nickName='" + nickName + '\'' +
                 ", regDate=" + regDate +
                 '}';
     }

@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(
@@ -20,6 +17,17 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+
+    // GET
+    @RequestMapping(
+            value = "/api/member/{key}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.GET
+    )
+    public ResponseEntity getMember(@PathVariable Long key) {
+        System.out.println("getMember");
+        return ResponseEntity.ok(memberService.getMemberByKey(key));
+    }
 
     @RequestMapping(
             value = "/api/member",

@@ -5,6 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * 어노테이션
+ */
 @SpringBootApplication
 public class GomawaApplication {
 
@@ -16,6 +19,4 @@ public class GomawaApplication {
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
-
-
 }
