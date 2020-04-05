@@ -18,30 +18,30 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    // GET
-    @RequestMapping(
-            value = "/api/member/{key}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            method = RequestMethod.GET
-    )
-    public ResponseEntity getMember(@PathVariable Long key) {
-        System.out.println("getMember");
-        return ResponseEntity.ok(memberService.getMemberByKey(key));
-    }
-
+    // POST
     @RequestMapping(
             value = "/api/member",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.POST
-    )
-    public ResponseEntity addMember(@RequestBody Member memberParam) {
+    ) // 로그인 후 최초 1회만 실행되는 addMember - NickName 설정 기능
+    public ResponseEntity addMemberOnStart(@RequestBody Member memberParam) {
+        // 반환되는 Member
         Member member = null;
-        try {
+
+        // 매개변수로 받아온 Member의 Key값
+        Long key = memberParam.getKey();
+
+        // 위 Key 값으로 찾은 Member. 없으면 Null 값이 들어가있음
+        Member findedMember = memberService.getMemberByKey(key);
+
+        if(findedMember == null) {
+            // 위 Key 값으로 가입된 Member 가 없다면 ~ 매개변수로 받아온 Member를 DB에 추가하고, 해당 Member 를 반환
             member = memberService.addMember(memberParam);
-            System.out.println("member = " + member);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            // 위 Key 값으로 가입된 Member 가 있다면 ~ 새로 DB에 추가하는 것 없이, DB에 있는 Member를 반환
+            member = findedMember;
         }
+
         return ResponseEntity.ok(member);
     }
 }
