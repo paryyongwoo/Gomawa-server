@@ -38,4 +38,39 @@ public class MemberService {
     public Member addMember(Member member) {
         return memberRepository.save(member);
     }
+
+    /**
+     * 1. Key 값으로 DB 에서 Member 를 가져오고
+     * 2. Member 가 있다면 그 Member 를 반환,
+     * 3. Member 가 없다면 클라이언트에서 받아온 Member 를 DB 에 INSERT 하는 메소드
+     */
+    public Member addMemberOnStart(Long key, Member memberParam) {
+        Member member = getMemberByKey(key);
+
+        if (member == null) {
+            // 위 Key 값으로 가입된 Member 가 없다면 ~ 매개변수로 받아온 Member를 DB에 추가하고, 해당 Member 를 반환
+            member = memberRepository.save(memberParam);
+        }
+
+        return member;
+    }
+
+    /**
+     * 1. Key 값으로 DB 에서 Member 를 가져오고
+     * 2. 가져온 Member 의 NickName 을 변경하고
+     * 3. DB 에 UPDATE 하는 메소드
+     */
+    public Member setNickName(Long key, String nickName) {
+        Member member = getMemberByKey(key);
+
+        if(member == null) {
+            // todo: DB에서 가져온 멤버가 null 일 때 예외 처리
+        } else {
+            member.setNickName(nickName);
+
+            memberRepository.save(member);
+        }
+
+        return member;
+    }
 }
