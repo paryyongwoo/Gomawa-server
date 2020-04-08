@@ -27,7 +27,7 @@ public class NoticeItemService {
         // 공지사항을 추가하는 기능이 없으니, 여기서 가짜 공지사항을 만들어 DB에 저장함
         NoticeItem noticeItem = new NoticeItem();
         noticeItem.setTitle("title");
-        noticeItem.setText("text");
+        noticeItem.setDsc("dsc");
         noticeItem.setDate("20000000");
         noticeItemRepository.save(noticeItem);
 

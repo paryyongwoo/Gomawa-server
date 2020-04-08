@@ -18,6 +18,6 @@ public class NoticeItem {
     @Column(name = "NOTICEITEM_ID")
     private Long id;
     private String title;
-    private String text;
+    private String dsc;
     private String date;
 }
