@@ -23,15 +23,20 @@ public class NoticeItemService {
      * GET
      */
     //
-    public List<NoticeItem> getNoticeAll() {
+    public List<NoticeItem> getNoticeAll() throws Exception {
         // 공지사항을 추가하는 기능이 없으니, 여기서 가짜 공지사항을 만들어 DB에 저장함
         NoticeItem noticeItem = new NoticeItem();
-        noticeItem.setTitle("title");
-        noticeItem.setDsc("dsc");
-        noticeItem.setDate("20000000");
+        noticeItem.setTitle("공지사항입니다!!");
+        noticeItem.setDsc("만나뵙게 되어 영광입니다\n잘 부탁합니다.");
+        noticeItem.setDate("1996년 6월 12일");
         noticeItemRepository.save(noticeItem);
 
         List<NoticeItem> noticeItems = noticeItemRepository.findAll();
+
+        // TODO: 2020-04-08 예외 처리
+        if (noticeItems == null) {
+            throw new Exception("noticeItems is null");
+        }
 
         return noticeItems;
     }

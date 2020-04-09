@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-// todo: 요거 다 지워야함
 @RequestMapping(
         produces = { MediaType.APPLICATION_JSON_VALUE, MediaTypes.HAL_JSON_VALUE }
         )
@@ -34,6 +33,13 @@ public class NoticeItemController {
             method = RequestMethod.GET
     ) // 모든 공지사항을 가져오는 메소드
     public ResponseEntity getNoticeAll() {
-        return ResponseEntity.ok(noticeItemService.getNoticeAll());
+        try {
+            List<NoticeItem> noticeItems = noticeItemService.getNoticeAll();
+            return ResponseEntity.ok(noticeItems);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TODO: 2020-04-08 에러 메시지 추가
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
