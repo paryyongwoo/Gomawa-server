@@ -73,4 +73,18 @@ public class MemberService {
 
         return member;
     }
+
+    /**
+     * 1. Key 값으로 DB 에서 Member 를 가져오고
+     * 2. 가져온 Member 를 매개변수로 Delete 하는 메소드
+     */
+    public void deleteMemberByKey(Long key) throws Exception {
+        Member member = getMemberByKey(key);
+
+        if(member == null) {
+            throw new Exception("해당 Key 값의 Member 가 없습니다.");
+        } else {
+            memberRepository.delete(member);
+        }
+    }
 }

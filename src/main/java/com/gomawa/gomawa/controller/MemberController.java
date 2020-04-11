@@ -4,6 +4,7 @@ import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.service.MemberService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(
-        produces = { MediaType.APPLICATION_JSON_VALUE, MediaTypes.HAL_JSON_VALUE },
-        consumes = { "application/x-www-form-urlencoded" }
+        produces = { MediaType.APPLICATION_JSON_VALUE, MediaTypes.HAL_JSON_VALUE }
+        //,consumes = { "application/x-www-form-urlencoded" }
         )
 public class MemberController {
 
@@ -79,6 +80,25 @@ public class MemberController {
             Map<String, String> response = new HashMap<>();
             response.put("msg", e.getMessage());
             return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+
+
+    // DELETE
+    @RequestMapping(
+            value = "api/member/{key}",
+            method = RequestMethod.DELETE
+    ) // Key 값으로 Member 를 찾아 DELETE 하는 메소드
+    public void deleteMemberByKey(@PathVariable("key") Long key) {
+        try {
+            System.out.println(key);
+
+            memberService.deleteMemberByKey(key);
+        } catch(Exception e) {
+            e.printStackTrace();
+
+            // TODO: 2020-04-11 데이터 삭제 시 에러나면 어떻게 에러 메세지를 보내야 하는가
         }
     }
 }
