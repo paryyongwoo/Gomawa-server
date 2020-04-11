@@ -100,5 +100,7 @@ public class MemberController {
 
             // TODO: 2020-04-11 데이터 삭제 시 에러나면 어떻게 에러 메세지를 보내야 하는가
         }
+
+        // TODO: 2020-04-12 HATEOAS 적용
     }
 }
