@@ -14,6 +14,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Optional;
+
 @Service
 @Transactional
 public class ShareItemService {
@@ -70,5 +74,26 @@ public class ShareItemService {
             shareItemDto.setMemberDto(memberDto);
 
             return shareItemDto;
+    }
+
+    public ShareItem addLike(long id) throws Exception {
+        Member dummyMember = new Member(1l, 123456l, "ektto1041@park.sang", "man", "mrPark", new Date(), null, null);
+        ShareItem dummyShareItem = new ShareItem(1l, "this is content", new Date(), 3, dummyMember, "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory&fname=https://k.kakaocdn.net/dn/EShJF/btquPLT192D/SRxSvXqcWjHRTju3kHcOQK/img.png");
+
+        // ID 값으로 게시글을 가져옴.
+        // ShareItem shareItem = shareItemRepository.findById(id).orElse(null);
+        ShareItem shareItem = dummyShareItem;
+
+        if(shareItem == null) { throw new Exception("해당 게시글이 존재하지 않습니다."); }
+
+        // 현재 좋아요 수
+        int likeNum = shareItem.getLikeNum();
+        shareItem.setLikeNum(likeNum + 1);
+
+        // 다시 DB 에 저장시킴 ( DB 에서 가져온 Entity 여서 UPDATE 됨 )
+        shareItemRepository.save(shareItem);
+
+        // 좋아요 수가 1 증가된 ShareItem 이 반환됨
+        return shareItem;
     }
 }

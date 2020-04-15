@@ -15,10 +15,7 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -26,8 +23,8 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping(
-        produces = MediaTypes.HAL_JSON_VALUE,
-        consumes = MediaType.APPLICATION_JSON_VALUE
+        produces = MediaTypes.HAL_JSON_VALUE
+        //,consumes = MediaType.APPLICATION_JSON_VALUE
 )
 public class ShareItemController {
 
@@ -66,6 +63,26 @@ public class ShareItemController {
         } catch (Exception e ) {
             e.printStackTrace();
             // TODO: 2020/04/15 메시지 처리
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @RequestMapping(
+            value = "/api/shareItem/like/{id}",
+            method = RequestMethod.PUT
+    )
+    public ResponseEntity<ShareItemDto> addLike(@PathVariable Long id) {
+        try {
+            // 반환할 데이터가 담긴 ShareItem Entity
+            ShareItem shareItemEntity = shareItemService.addLike(id);
+
+            ShareItemDto shareItemDto = shareItemEntity.entityToDto();
+
+            return ResponseEntity.ok(shareItemDto);
+        } catch(Exception e) {
+            // TODO: 2020-04-15 addLike 예외 발생 시 처리
+            e.printStackTrace();
+
             return ResponseEntity.badRequest().build();
         }
     }

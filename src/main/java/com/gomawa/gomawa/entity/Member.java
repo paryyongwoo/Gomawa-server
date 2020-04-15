@@ -1,5 +1,6 @@
 package com.gomawa.gomawa.entity;
 
+import com.gomawa.gomawa.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity @Getter @Setter
@@ -21,7 +23,7 @@ public class Member {
     private String email;
     private String gender;
     private String nickName;
-    private LocalDateTime regDate;
+    private Date regDate;
 
     @OneToOne
     @JoinColumn(name = "SETTING_ID")
@@ -38,5 +40,9 @@ public class Member {
                 ", nickName='" + nickName + '\'' +
                 ", regDate=" + regDate +
                 '}';
+    }
+
+    public MemberDto entityToDto() {
+        return new MemberDto(key, email, gender, nickName, regDate);
     }
 }

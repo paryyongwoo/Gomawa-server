@@ -1,13 +1,16 @@
 package com.gomawa.gomawa.dto;
 
+import com.gomawa.gomawa.entity.Member;
+
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class MemberDto {
     private Long key; // 네이버, 카카오 로그인에서 제공하는 식별자 id
     private String email;
     private String gender;
     private String nickName; // 닉네임
-    private LocalDateTime regDate;
+    private Date regDate;
 
     public MemberDto() {
 
@@ -41,11 +44,11 @@ public class MemberDto {
 
     public void setNickName(String nickName) { this.nickName = nickName; }
 
-    public LocalDateTime getRegDate() {
+    public Date getRegDate() {
         return regDate;
     }
 
-    public void setRegDate(LocalDateTime regDate) {
+    public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
 
@@ -60,7 +63,7 @@ public class MemberDto {
                 '}';
     }
 
-    public MemberDto(Long key, String email, String gender, String nickName, LocalDateTime regDate) {
+    public MemberDto(Long key, String email, String gender, String nickName, Date regDate) {
         this.key = key;
         this.email = email;
         this.gender = gender;

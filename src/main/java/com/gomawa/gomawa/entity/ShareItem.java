@@ -1,5 +1,7 @@
 package com.gomawa.gomawa.entity;
 
+import com.gomawa.gomawa.dto.MemberDto;
+import com.gomawa.gomawa.dto.ShareItemDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 게시글 엔터티
@@ -23,10 +26,11 @@ public class ShareItem {
     private String content;
 
     // 등록일
-    private LocalDateTime regDate = LocalDateTime.now();
+    // 임시로 현재 시각이 입력됨
+    private Date regDate = new Date();
 
     // 좋아요
-    private int likeNum = 0;
+    private int likeNum;
 
     // 글쓴이
     @ManyToOne
@@ -44,5 +48,12 @@ public class ShareItem {
                 ", regDate=" + regDate +
                 ", likeNum=" + likeNum +
                 '}';
+    }
+
+    public ShareItemDto entityToDto() {
+        // 연관관계에 있는 Member 역시 DTO 로 변환
+        MemberDto memberDto = member.entityToDto();
+
+        return new ShareItemDto(id, memberDto, regDate, content, backgroundUrl, likeNum);
     }
 }

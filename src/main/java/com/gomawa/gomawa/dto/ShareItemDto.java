@@ -1,12 +1,15 @@
 package com.gomawa.gomawa.dto;
 
+import com.gomawa.gomawa.entity.Member;
+import com.gomawa.gomawa.entity.ShareItem;
+
 import java.util.Date;
 
 public class ShareItemDto {
     // 데이터베이스 pk
     private long id;
     // 글쓴이 key
-    private long key;
+    // private long key;
     // 글작성 시간
     private Date date; // LocalDateTime이 지원하는 api레벨이 높아서 Date 객체를 사용.. String 고려..
     // 글내용
@@ -15,15 +18,25 @@ public class ShareItemDto {
     private String backgroundUrl;
     // 좋아요
     private int like;
+    // 글쓴이
     private MemberDto memberDto;
 
     public ShareItemDto() {
 
     }
 
-    public ShareItemDto(long id, long key, Date date, String content, String backgroundUrl, int like) {
+//    public ShareItemDto(long id, long key, Date date, String content, String backgroundUrl, int like) {
+//        this.id = id;
+//        this.key = key;
+//        this.date = date;
+//        this.content = content;
+//        this.backgroundUrl = backgroundUrl;
+//        this.like = like;
+//    }
+
+    public ShareItemDto(long id, MemberDto memberDto, Date date, String content, String backgroundUrl, int like) {
         this.id = id;
-        this.key = key;
+        this.memberDto = memberDto;
         this.date = date;
         this.content = content;
         this.backgroundUrl = backgroundUrl;
@@ -46,13 +59,13 @@ public class ShareItemDto {
         this.id = id;
     }
 
-    public long getKey() {
-        return key;
-    }
+//    public long getKey() {
+//        return key;
+//    }
 
-    public void setKey(long key) {
-        this.key = key;
-    }
+//    public void setKey(long key) {
+//        this.key = key;
+//    }
 
     public String getContent() {
         return content;

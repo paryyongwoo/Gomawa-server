@@ -40,7 +40,9 @@ public class MemberController {
 
             Member member = memberService.addMemberOnStart(key, memberParam);
 
-            return ResponseEntity.ok(member);
+            MemberDto memberDto = member.entityToDto();
+
+            return ResponseEntity.ok(memberDto);
         } catch (Exception e) {
             e.printStackTrace();
 
