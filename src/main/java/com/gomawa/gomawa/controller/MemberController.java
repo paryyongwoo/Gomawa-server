@@ -1,5 +1,6 @@
 package com.gomawa.gomawa.controller;
 
+import com.gomawa.gomawa.dto.MemberDto;
 import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.service.MemberService;
 import org.apache.coyote.Response;
@@ -72,7 +73,18 @@ public class MemberController {
             // 반환될 Member - 닉네임이 수정되어 있는 Member
             Member member = memberService.setNickName(key, nickName);
 
-            return ResponseEntity.ok(member);
+            /**
+             * Member -> MemberDto로 변환
+             */
+            // TODO: 2020/04/15 converter 추가
+            MemberDto memberDto = new MemberDto();
+            memberDto.setEmail(member.getEmail());
+            memberDto.setNickName(member.getNickName());
+            memberDto.setGender(member.getGender());
+            memberDto.setKey(member.getKey());
+            memberDto.setRegDate(member.getRegDate());
+
+            return ResponseEntity.ok(memberDto);
         } catch (Exception e) {
             e.printStackTrace();
 
