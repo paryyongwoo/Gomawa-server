@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,6 +31,12 @@ public class ShareItemService {
 
     @Autowired
     private S3Service s3Service;
+
+    public List<ShareItem> getShareItemAll() {
+        List<ShareItem> shareItems = shareItemRepository.findAll();
+
+        return shareItems;
+    }
 
     public ShareItemDto addShareItem(MultipartFile file, String items) throws Exception {
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -62,27 +69,20 @@ public class ShareItemService {
             shareItem.setContent(content);
             shareItem.setMember(member);
             shareItem.setBackgroundUrl(uploadUrl);
+            shareItem.setRegDate(new Date());
 
             // shareItem 테이블 저장
             shareItemRepository.save(shareItem);
 
-            // ResponseBody에 넣어서 보내줄 데이터 설정
-            MemberDto memberDto = new MemberDto();
-            memberDto.setEmail(member.getEmail());
-            memberDto.setNickName(member.getNickName());
-            ShareItemDto shareItemDto = new ShareItemDto();
-            shareItemDto.setMemberDto(memberDto);
+            // ShareItem Entity 를 DTO 로 변경
+            ShareItemDto shareItemDto = shareItem.entityToDto();
 
             return shareItemDto;
     }
 
     public ShareItem addLike(long id) throws Exception {
-        Member dummyMember = new Member(1l, 123456l, "ektto1041@park.sang", "man", "mrPark", new Date(), null, null, null);
-        ShareItem dummyShareItem = new ShareItem(1l, "this is content", new Date(), 3, dummyMember, "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory&fname=https://k.kakaocdn.net/dn/EShJF/btquPLT192D/SRxSvXqcWjHRTju3kHcOQK/img.png");
-
         // ID 값으로 게시글을 가져옴.
-        // ShareItem shareItem = shareItemRepository.findById(id).orElse(null);
-        ShareItem shareItem = dummyShareItem;
+        ShareItem shareItem = shareItemRepository.findById(id).orElse(null);
 
         if(shareItem == null) { throw new Exception("해당 게시글이 존재하지 않습니다."); }
 

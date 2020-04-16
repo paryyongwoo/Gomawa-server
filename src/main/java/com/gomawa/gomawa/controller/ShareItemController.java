@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping(
         produces = MediaTypes.HAL_JSON_VALUE
@@ -25,6 +28,28 @@ public class ShareItemController {
     @Autowired
     private ShareItemService shareItemService;
 
+    // GET
+    @RequestMapping(
+            value = "/api/shareItem",
+            method = RequestMethod.GET
+    )
+    public ResponseEntity<List<ShareItemDto>> getShareItemAll() {
+        // ShareItem Entity List
+        List<ShareItem> shareItems = shareItemService.getShareItemAll();
+        int size = shareItems.size();
+
+        // 반환될 ShareItem DTO List
+        List<ShareItemDto> shareItemDtos = new ArrayList<ShareItemDto>();
+
+        // ShareItem Entity -> DTO 변환
+        for(int i=0; i<size; i++) {
+            shareItemDtos.add(shareItems.get(i).entityToDto());
+        }
+
+        return ResponseEntity.ok(shareItemDtos);
+    }
+
+    // POST
     /**
      * @param file 업로드 이미지 파일
      * @param items 글내용, 작성자의 key가 담겨있는 json형식의 문자열
