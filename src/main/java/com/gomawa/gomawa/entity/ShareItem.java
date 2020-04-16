@@ -30,7 +30,7 @@ public class ShareItem {
     private Date regDate = new Date();
 
     // 좋아요
-    private int likeNum;
+    private int likeNum = 0;
 
     // 글쓴이
     @ManyToOne
