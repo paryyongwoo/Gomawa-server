@@ -24,6 +24,7 @@ public class Member {
     private String gender;
     private String nickName;
     private Date regDate;
+    private String profileImgUrl;
 
     @OneToOne
     @JoinColumn(name = "SETTING_ID")
@@ -43,6 +44,6 @@ public class Member {
     }
 
     public MemberDto entityToDto() {
-        return new MemberDto(key, email, gender, nickName, regDate);
+        return new MemberDto(key, email, gender, nickName, regDate, profileImgUrl);
     }
 }

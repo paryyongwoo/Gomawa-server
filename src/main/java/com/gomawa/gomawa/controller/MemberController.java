@@ -78,7 +78,7 @@ public class MemberController {
             /**
              * Member -> MemberDto로 변환
              */
-            // TODO: 2020/04/15 converter 추가
+            // TODO: 2020/04/15 converter를 통해 MemberDto로 전환하게 로직 수정 필요
             MemberDto memberDto = new MemberDto();
             memberDto.setEmail(member.getEmail());
             memberDto.setNickName(member.getNickName());

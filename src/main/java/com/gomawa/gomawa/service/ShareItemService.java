@@ -77,7 +77,7 @@ public class ShareItemService {
     }
 
     public ShareItem addLike(long id) throws Exception {
-        Member dummyMember = new Member(1l, 123456l, "ektto1041@park.sang", "man", "mrPark", new Date(), null, null);
+        Member dummyMember = new Member(1l, 123456l, "ektto1041@park.sang", "man", "mrPark", new Date(), null, null, null);
         ShareItem dummyShareItem = new ShareItem(1l, "this is content", new Date(), 3, dummyMember, "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory&fname=https://k.kakaocdn.net/dn/EShJF/btquPLT192D/SRxSvXqcWjHRTju3kHcOQK/img.png");
 
         // ID 값으로 게시글을 가져옴.

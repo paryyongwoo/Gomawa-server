@@ -1,19 +1,32 @@
 package com.gomawa.gomawa.dto;
 
-import com.gomawa.gomawa.entity.Member;
-
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class MemberDto {
-    private Long key; // 네이버, 카카오 로그인에서 제공하는 식별자 id
+    // 네이버, 카카오 로그인에서 제공하는 식별자 id
+    private Long key;
+    // 이메일
     private String email;
+    // 성별
     private String gender;
-    private String nickName; // 닉네임
+    // 닉네임
+    private String nickName;
+    // 최초 로그인 시각
     private Date regDate;
+    // 프로필 이미지 url
+    private String profileImgUrl;
 
     public MemberDto() {
 
+    }
+
+    public MemberDto(Long key, String email, String gender, String nickName, Date regDate, String profileImgUrl) {
+        this.key = key;
+        this.email = email;
+        this.gender = gender;
+        this.nickName = nickName;
+        this.regDate = regDate;
+        this.profileImgUrl = profileImgUrl;
     }
 
     public Long getKey() {
@@ -52,6 +65,14 @@ public class MemberDto {
         this.regDate = regDate;
     }
 
+    public String getProfileImgUrl() {
+        return profileImgUrl;
+    }
+
+    public void setProfileImgUrl(String profileImgUrl) {
+        this.profileImgUrl = profileImgUrl;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
@@ -60,14 +81,7 @@ public class MemberDto {
                 ", gender='" + gender + '\'' +
                 ", nickName='" + nickName + '\'' +
                 ", regDate=" + regDate +
+                ", profileImgUrl='" + profileImgUrl + '\'' +
                 '}';
-    }
-
-    public MemberDto(Long key, String email, String gender, String nickName, Date regDate) {
-        this.key = key;
-        this.email = email;
-        this.gender = gender;
-        this.nickName = nickName;
-        this.regDate = regDate;
     }
 }
