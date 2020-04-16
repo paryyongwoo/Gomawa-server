@@ -1,32 +1,21 @@
-package com.gomawa.gomawa.entity;
+package com.gomawa.gomawa.dto;
 
-import com.gomawa.gomawa.dto.DailyThanksDto;
-import com.gomawa.gomawa.dto.MemberDto;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
-@Entity
-@NoArgsConstructor
-public class DailyThanks {
-
-    @Id @GeneratedValue
+public class DailyThanksDto {
     private Long id;
-    @Lob
     private String content1;
-    @Lob
     private String content2;
-    @Lob
     private String content3;
     private Date regDate;
-    @ManyToOne
-    @JoinColumn(name = "MEMBER_ID")
-    private Member regMember;
+    private MemberDto regMember;
 
-    public DailyThanks(String content1, String content2, String content3, Date regDate, Member regMember) {
+    public DailyThanksDto() {
+
+    }
+
+    public DailyThanksDto(Long id, String content1, String content2, String content3, Date regDate, MemberDto regMember) {
+        this.id = id;
         this.content1 = content1;
         this.content2 = content2;
         this.content3 = content3;
@@ -74,12 +63,12 @@ public class DailyThanks {
         this.regDate = regDate;
     }
 
-    public Member getRegMember() {
+    public MemberDto getRegMember() {
         return regMember;
     }
 
-    public void setRegMember(Member member) {
-        this.regMember = member;
+    public void setRegMember(MemberDto regMember) {
+        this.regMember = regMember;
     }
 
     @Override
@@ -91,11 +80,5 @@ public class DailyThanks {
                 ", content3='" + content3 + '\'' +
                 ", regDate=" + regDate +
                 '}';
-    }
-
-    public DailyThanksDto convertToDto() {
-        MemberDto memberDto = this.regMember.entityToDto();
-
-        return new DailyThanksDto(this.id, this.content1, this.content2, this.content3, this.regDate, memberDto);
     }
 }

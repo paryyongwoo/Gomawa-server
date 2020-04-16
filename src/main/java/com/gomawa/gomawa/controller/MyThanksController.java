@@ -1,5 +1,7 @@
 package com.gomawa.gomawa.controller;
 
+import com.gomawa.gomawa.dto.DailyThanksDto;
+import com.gomawa.gomawa.dto.MemberDto;
 import com.gomawa.gomawa.entity.DailyThanks;
 import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.repository.MemberRepository;
@@ -26,17 +28,14 @@ public class MyThanksController {
     private MemberRepository memberRepository;
 
 
-/*    @RequestMapping(
+    @RequestMapping(
             value= "/api/dailyThanks",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity addDailyThanks(@RequestBody DailyThanks dailyThanksParam) {
-        Long key = dailyThanksParam.getMember().getKey();
-        Member regMember = memberRepository.findByKey(key);
-        dailyThanksParam.setMember(regMember);
-        DailyThanks dailyThanks = myThanksService.addDailyThanks(dailyThanksParam);
-        return ResponseEntity.ok(dailyThanks);
-    }*/
+    public ResponseEntity addDailyThanks(@RequestBody DailyThanksDto dailyThanksDto) {
+        DailyThanksDto savedDailyThanksDto = myThanksService.addDailyThanks(dailyThanksDto);
+        return ResponseEntity.ok(savedDailyThanksDto);
+    }
 
 }
