@@ -19,7 +19,7 @@ public class ShareItemDto {
     // 좋아요
     private int like;
     // 글쓴이
-    private MemberDto memberDto;
+    private MemberDto member;
 
     public ShareItemDto() {
 
@@ -36,7 +36,7 @@ public class ShareItemDto {
 
     public ShareItemDto(long id, MemberDto memberDto, Date date, String content, String backgroundUrl, int like) {
         this.id = id;
-        this.memberDto = memberDto;
+        this.member = memberDto;
         this.date = date;
         this.content = content;
         this.backgroundUrl = backgroundUrl;
@@ -91,11 +91,23 @@ public class ShareItemDto {
         this.like = like;
     }
 
-    public MemberDto getMemberDto() {
-        return memberDto;
+    public MemberDto getMember() {
+        return member;
     }
 
-    public void setMemberDto(MemberDto memberDto) {
-        this.memberDto = memberDto;
+    public void setMember(MemberDto memberDto) {
+        this.member = memberDto;
+    }
+
+    @Override
+    public String toString() {
+        return "ShareItemDto{" +
+                "id=" + id +
+                ", date=" + date +
+                ", content='" + content + '\'' +
+                ", backgroundUrl='" + backgroundUrl + '\'' +
+                ", like=" + like +
+                ", member=" + member +
+                '}';
     }
 }
