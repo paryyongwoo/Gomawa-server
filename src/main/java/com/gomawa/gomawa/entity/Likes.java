@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
-public class Like {
+public class Likes {
     @Id @GeneratedValue
     @Column(name = "LIKE_ID")
     private Long id;
@@ -27,7 +27,7 @@ public class Like {
 
     @Override
     public String toString() {
-        return "Like{" +
+        return "Likes{" +
                 "id=" + id +
                 ", member=" + member +
                 ", shareItem=" + shareItem +

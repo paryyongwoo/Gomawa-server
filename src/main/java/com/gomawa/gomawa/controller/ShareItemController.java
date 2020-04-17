@@ -1,16 +1,12 @@
 package com.gomawa.gomawa.controller;
 
 import com.gomawa.gomawa.dto.ShareItemDto;
-import com.gomawa.gomawa.entity.Like;
 import com.gomawa.gomawa.entity.ShareItem;
 import com.gomawa.gomawa.service.ShareItemService;
-import org.apache.tomcat.jni.Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

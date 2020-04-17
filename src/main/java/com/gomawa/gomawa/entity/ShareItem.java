@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +40,7 @@ public class ShareItem {
 
     // 좋아요
     @OneToMany(mappedBy = "shareItem")
-    private List<Like> likeList = new ArrayList();
+    private List<Likes> likeList = new ArrayList();
 
     // 업로드 이미지의 s3 url
     private String backgroundUrl;

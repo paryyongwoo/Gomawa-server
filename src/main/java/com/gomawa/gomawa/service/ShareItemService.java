@@ -1,9 +1,7 @@
 package com.gomawa.gomawa.service;
 
 import com.gomawa.gomawa.aws.S3Service;
-import com.gomawa.gomawa.dto.MemberDto;
 import com.gomawa.gomawa.dto.ShareItemDto;
-import com.gomawa.gomawa.entity.Like;
 import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.entity.ShareItem;
 import com.gomawa.gomawa.repository.ShareItemRepository;
@@ -12,13 +10,10 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
