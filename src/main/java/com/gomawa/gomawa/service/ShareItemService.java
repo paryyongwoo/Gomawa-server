@@ -3,6 +3,7 @@ package com.gomawa.gomawa.service;
 import com.gomawa.gomawa.aws.S3Service;
 import com.gomawa.gomawa.dto.MemberDto;
 import com.gomawa.gomawa.dto.ShareItemDto;
+import com.gomawa.gomawa.entity.Like;
 import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.entity.ShareItem;
 import com.gomawa.gomawa.repository.ShareItemRepository;
@@ -78,22 +79,5 @@ public class ShareItemService {
             ShareItemDto shareItemDto = shareItem.entityToDto();
 
             return shareItemDto;
-    }
-
-    public ShareItem addLike(long id) throws Exception {
-        // ID 값으로 게시글을 가져옴.
-        ShareItem shareItem = shareItemRepository.findById(id).orElse(null);
-
-        if(shareItem == null) { throw new Exception("해당 게시글이 존재하지 않습니다."); }
-
-        // 현재 좋아요 수
-        int likeNum = shareItem.getLikeNum();
-        shareItem.setLikeNum(likeNum + 1);
-
-        // 다시 DB 에 저장시킴 ( DB 에서 가져온 Entity 여서 UPDATE 됨 )
-        shareItemRepository.save(shareItem);
-
-        // 좋아요 수가 1 증가된 ShareItem 이 반환됨
-        return shareItem;
     }
 }

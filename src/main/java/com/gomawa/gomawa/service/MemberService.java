@@ -1,6 +1,9 @@
 package com.gomawa.gomawa.service;
 
+import com.gomawa.gomawa.entity.Like;
 import com.gomawa.gomawa.entity.Member;
+import com.gomawa.gomawa.entity.ShareItem;
+import com.gomawa.gomawa.repository.LikeRepository;
 import com.gomawa.gomawa.repository.MemberRepository;
 import com.gomawa.gomawa.repository.ShareItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;

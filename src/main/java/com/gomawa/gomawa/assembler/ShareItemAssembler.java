@@ -27,7 +27,7 @@ public class ShareItemAssembler extends RepresentationModelAssemblerSupport<Shar
         shareItemModel.setMember(entity.getMember());
         //shareItemModel.setRegDate(entity.getRegDate());
         shareItemModel.setBackgroundUrl(entity.getBackgroundUrl());
-        shareItemModel.setLikeNum(entity.getLikeNum());
+        //shareItemModel.setLikeNum(entity.getLikeNum());
 
         return shareItemModel;
     }

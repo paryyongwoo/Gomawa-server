@@ -31,6 +31,8 @@ public class Member {
     private Setting setting;
     @OneToMany(mappedBy = "member")
     private List<ShareItem> shareItemList = new ArrayList();
+    @OneToMany(mappedBy = "member")
+    private List<Like> likeList = new ArrayList();
 
     @Override
     public String toString() {

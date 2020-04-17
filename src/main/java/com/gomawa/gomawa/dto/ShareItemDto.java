@@ -17,7 +17,7 @@ public class ShareItemDto {
     // 이미지 주소
     private String backgroundUrl;
     // 좋아요
-    private int like;
+    private int likeNum;
     // 글쓴이
     private MemberDto member;
 
@@ -34,13 +34,13 @@ public class ShareItemDto {
 //        this.like = like;
 //    }
 
-    public ShareItemDto(long id, MemberDto memberDto, Date date, String content, String backgroundUrl, int like) {
+    public ShareItemDto(long id, MemberDto memberDto, Date date, String content, String backgroundUrl, int likeNum) {
         this.id = id;
         this.member = memberDto;
         this.date = date;
         this.content = content;
         this.backgroundUrl = backgroundUrl;
-        this.like = like;
+        this.likeNum = likeNum;
     }
 
     public Date getDate() {
@@ -59,14 +59,6 @@ public class ShareItemDto {
         this.id = id;
     }
 
-//    public long getKey() {
-//        return key;
-//    }
-
-//    public void setKey(long key) {
-//        this.key = key;
-//    }
-
     public String getContent() {
         return content;
     }
@@ -83,12 +75,12 @@ public class ShareItemDto {
         this.backgroundUrl = backgroundUrl;
     }
 
-    public int getLike() {
-        return like;
+    public int getLikeNum() {
+        return likeNum;
     }
 
-    public void setLike(int like) {
-        this.like = like;
+    public void setLikeNum(int likeNum) {
+        this.likeNum = likeNum;
     }
 
     public MemberDto getMember() {
@@ -106,7 +98,7 @@ public class ShareItemDto {
                 ", date=" + date +
                 ", content='" + content + '\'' +
                 ", backgroundUrl='" + backgroundUrl + '\'' +
-                ", like=" + like +
+                ", likeNum=" + likeNum +
                 ", member=" + member +
                 '}';
     }

@@ -1,6 +1,7 @@
 package com.gomawa.gomawa.controller;
 
 import com.gomawa.gomawa.dto.ShareItemDto;
+import com.gomawa.gomawa.entity.Like;
 import com.gomawa.gomawa.entity.ShareItem;
 import com.gomawa.gomawa.service.ShareItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,26 +69,6 @@ public class ShareItemController {
         } catch (Exception e ) {
             e.printStackTrace();
             // TODO: 2020/04/15 메시지 처리
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @RequestMapping(
-            value = "/api/shareItem/like/{id}",
-            method = RequestMethod.PUT
-    )
-    public ResponseEntity<ShareItemDto> addLike(@PathVariable Long id) {
-        try {
-            // 반환할 데이터가 담긴 ShareItem Entity
-            ShareItem shareItemEntity = shareItemService.addLike(id);
-
-            ShareItemDto shareItemDto = shareItemEntity.entityToDto();
-
-            return ResponseEntity.ok(shareItemDto);
-        } catch(Exception e) {
-            // TODO: 2020-04-15 addLike 예외 발생 시 처리
-            e.printStackTrace();
-
             return ResponseEntity.badRequest().build();
         }
     }
