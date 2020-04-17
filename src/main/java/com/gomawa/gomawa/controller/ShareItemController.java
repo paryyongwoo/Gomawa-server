@@ -4,6 +4,7 @@ import com.gomawa.gomawa.dto.ShareItemDto;
 import com.gomawa.gomawa.entity.Like;
 import com.gomawa.gomawa.entity.ShareItem;
 import com.gomawa.gomawa.service.ShareItemService;
+import org.apache.tomcat.jni.Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;

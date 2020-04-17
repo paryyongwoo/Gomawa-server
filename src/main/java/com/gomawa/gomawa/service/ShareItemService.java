@@ -62,8 +62,13 @@ public class ShareItemService {
              * 2. s3에서 받은 업로드 파일의 주소를 db에 저장
              */
             // TODO: 2020/04/15 파일 이름 설정
-            String uploadUrl = s3Service.upload(file);
-            System.out.println("uploadUrl = " + uploadUrl);
+            String uploadUrl = null;
+            if (file.getSize() != 0) {
+                /**
+                 * 업로드하려는 이미지가 있는 경우
+                 */
+                uploadUrl = s3Service.upload(file);
+            }
 
             // ShareItem 객체 생성
             ShareItem shareItem = new ShareItem();
