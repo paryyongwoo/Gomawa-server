@@ -42,6 +42,10 @@ public class ShareItem {
     @OneToMany(mappedBy = "shareItem")
     private List<Likes> likeList = new ArrayList();
 
+    // 댓글
+    @OneToMany(mappedBy = "shareItem")
+    private List<Comment> commentList = new ArrayList<>();
+
     // 업로드 이미지의 s3 url
     private String backgroundUrl;
 

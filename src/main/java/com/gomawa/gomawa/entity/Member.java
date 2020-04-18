@@ -32,6 +32,8 @@ public class Member {
     private List<ShareItem> shareItemList = new ArrayList();
     @OneToMany(mappedBy = "member")
     private List<Likes> likeList = new ArrayList();
+    @OneToMany(mappedBy = "member")
+    private List<Comment> commentList = new ArrayList<>();
 
     @Override
     public String toString() {

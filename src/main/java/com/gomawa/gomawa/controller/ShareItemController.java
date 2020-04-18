@@ -36,6 +36,7 @@ public class ShareItemController {
         List<ShareItem> shareItems = shareItemService.getShareItemAll();
         int size = shareItems.size();
 
+        // TODO: 2020-04-18 Sevice로 옮기기 
         // 반환될 ShareItem DTO List
         List<ShareItemDto> shareItemDtos = new ArrayList<ShareItemDto>();
 

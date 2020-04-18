@@ -1,5 +1,9 @@
 package com.gomawa.gomawa.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.gomawa.gomawa.dto.CommentDto;
+import com.gomawa.gomawa.dto.MemberDto;
+import com.gomawa.gomawa.dto.ShareItemDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,10 +22,19 @@ public class Comment {
     @Lob
     private String content;
     @ManyToOne
-    @JoinColumn(name = "SHARE_ITME_ID")
+    @JoinColumn(name = "SHARE_ITEM_ID")
     private ShareItem shareItem;
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
     private Date regDate;
+
+    public CommentDto entityToDto() {
+        MemberDto memberDto = member.entityToDto();
+        ShareItemDto shareItemDto = shareItem.entityToDto();
+
+        CommentDto commentDto = new CommentDto(id, content, shareItemDto, memberDto, regDate);
+
+        return commentDto;
+    }
 }
