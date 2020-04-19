@@ -22,10 +22,10 @@ public class Member {
     private String email;
     private String gender;
     private String nickName;
-    private Date regDate;
+    private Date regDate = new Date();
     private String profileImgUrl;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SETTING_ID")
     private Setting setting;
     @OneToMany(mappedBy = "member")

@@ -21,10 +21,10 @@ public class Comment {
     private long id;
     @Lob
     private String content;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SHARE_ITEM_ID")
     private ShareItem shareItem;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
     private Date regDate;

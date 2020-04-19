@@ -70,7 +70,6 @@ public class ShareItemService {
             shareItem.setContent(content);
             shareItem.setMember(member);
             shareItem.setBackgroundUrl(uploadUrl);
-            shareItem.setRegDate(null);
 
             // shareItem 테이블 저장
             shareItemRepository.save(shareItem);

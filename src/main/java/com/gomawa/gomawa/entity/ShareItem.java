@@ -27,14 +27,13 @@ public class ShareItem {
     private String content;
 
     // 등록일
-    // 임시로 현재 시각이 입력됨
     private Date regDate = new Date();
 
-    // 좋아요
-    // private int likeNum = 0;
+    // 업로드 이미지의 s3 url
+    private String backgroundUrl;
 
     // 글쓴이
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
@@ -45,19 +44,6 @@ public class ShareItem {
     // 댓글
     @OneToMany(mappedBy = "shareItem")
     private List<Comment> commentList = new ArrayList<>();
-
-    // 업로드 이미지의 s3 url
-    private String backgroundUrl;
-
-    @Override
-    public String toString() {
-        return "ShareItem{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", regDate=" + regDate +
-                //", likeNum=" + likeNum +
-                '}';
-    }
 
     public ShareItemDto entityToDto() {
         // 연관관계에 있는 Member 역시 DTO 로 변환

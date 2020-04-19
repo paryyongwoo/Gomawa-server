@@ -17,11 +17,11 @@ public class Likes {
     @Column(name = "LIKE_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SHAREITEM_ID")
     private ShareItem shareItem;
 
