@@ -4,6 +4,7 @@ import com.gomawa.gomawa.aws.S3Service;
 import com.gomawa.gomawa.dto.ShareItemDto;
 import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.entity.ShareItem;
+import com.gomawa.gomawa.repository.MemberRepository;
 import com.gomawa.gomawa.repository.ShareItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +25,9 @@ public class ShareItemService {
     private ShareItemRepository shareItemRepository;
 
     @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
     private MemberService memberService;
 
     @Autowired
@@ -32,6 +37,24 @@ public class ShareItemService {
         List<ShareItem> shareItems = shareItemRepository.findAll();
 
         return shareItems;
+    }
+
+    public List<ShareItemDto> getShareItemByMemberKey(Long memberKey) throws Exception {
+        // Member Key 로 Member 가져오기
+        Member member = memberRepository.findByKey(memberKey).orElse(null);
+        if(member == null) { throw new Exception("member is null"); }
+
+        // Member 로 ShareItem List 가져오기
+        List<ShareItem> shareItemList = shareItemRepository.findAllByMember(member);
+        int size = shareItemList.size();
+
+        // DTO 변환
+        List<ShareItemDto> shareItemDtoList = new ArrayList<>();
+        for(int i=0; i<size; i++) {
+            shareItemDtoList.add(shareItemList.get(i).entityToDto());
+        }
+
+        return shareItemDtoList;
     }
 
     public ShareItemDto addShareItem(MultipartFile file, String items) throws Exception {

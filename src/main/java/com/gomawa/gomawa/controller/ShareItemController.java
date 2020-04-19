@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -46,6 +43,22 @@ public class ShareItemController {
         }
 
         return ResponseEntity.ok(shareItemDtos);
+    }
+
+    @RequestMapping(
+            value = "/api/shareItem/{memberKey}",
+            method = RequestMethod.GET
+    )
+    public ResponseEntity<List<ShareItemDto>> getShareItemByMemberKey(@PathVariable("memberKey") Long memberKey) {
+        try {
+            List<ShareItemDto> shareItemDtoList = shareItemService.getShareItemByMemberKey(memberKey);
+
+            return ResponseEntity.ok(shareItemDtoList);
+        } catch(Exception e) {
+            e.printStackTrace();
+
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     // POST
