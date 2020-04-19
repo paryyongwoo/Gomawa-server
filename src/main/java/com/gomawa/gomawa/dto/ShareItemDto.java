@@ -20,6 +20,8 @@ public class ShareItemDto {
     private int likeNum;
     // 글쓴이
     private MemberDto member;
+    // 좋아요 클릭 여부
+    private boolean isLike;
 
     public ShareItemDto() {
 
@@ -80,6 +82,14 @@ public class ShareItemDto {
 
     public void setMember(MemberDto memberDto) {
         this.member = memberDto;
+    }
+
+    public boolean getIsLike() {
+        return isLike;
+    }
+
+    public void setIsLike(boolean isLike) {
+        this.isLike = isLike;
     }
 
     @Override

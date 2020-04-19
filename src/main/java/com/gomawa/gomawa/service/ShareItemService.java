@@ -5,6 +5,7 @@ import com.gomawa.gomawa.dto.ShareItemDto;
 import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.entity.ShareItem;
 import com.gomawa.gomawa.repository.MemberRepository;
+import com.gomawa.gomawa.repository.LikeRepository;
 import com.gomawa.gomawa.repository.ShareItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -28,15 +29,29 @@ public class ShareItemService {
     private MemberRepository memberRepository;
 
     @Autowired
+    private LikeRepository likeRepository;
+
+    @Autowired
     private MemberService memberService;
 
     @Autowired
     private S3Service s3Service;
 
-    public List<ShareItem> getShareItemAll() {
-        List<ShareItem> shareItems = shareItemRepository.findAll();
+    public List<ShareItemDto> getShareItemAll(Long memberId) {
+        // 반환될 ShareItem DTO List
+        List<ShareItemDto> shareItemDtos = new ArrayList<>();
 
-        return shareItems;
+        List<ShareItem> shareItems = shareItemRepository.findAll();
+        for (ShareItem shareItem : shareItems) {
+            Long shareItemId = shareItem.getId();
+            boolean isLike = likeRepository.existsLikesByMemberIdAndShareItemId(memberId, shareItemId);
+            System.out.println("isLike = " + isLike);
+            ShareItemDto shareItemDto = shareItem.entityToDto();
+            shareItemDto.setIsLike(isLike);
+            shareItemDtos.add(shareItemDto);
+        }
+
+        return shareItemDtos;
     }
 
     public List<ShareItemDto> getShareItemByMemberKey(Long memberKey) throws Exception {

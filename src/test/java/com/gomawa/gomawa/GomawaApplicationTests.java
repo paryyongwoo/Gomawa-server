@@ -14,30 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-@AutoConfigureMockMvc // 이걸 추가해줘야 MockMvc 빈을 사용 가능
 class GomawaApplicationTests {
-
-	@Autowired
-	MockMvc mockMvc;
-
-	@Test
-	public void controllerTest() throws Exception {
-
-		this.mockMvc.perform(get("/api/hello"))
-				.andDo(print())
-				.andExpect(status().isOk());
-	}
-
-	@Test
-	public void getLoginRequestUrl() throws Exception {
-
-		this.mockMvc.perform(get("/api/login")
-						.accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("url").exists());
-	}
 
 }

@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface LikeRepository extends JpaRepository<Likes, Long> {
     Optional<Likes> findByMemberAndShareItem(Member member, ShareItem shareItem);
+    boolean existsLikesByMemberIdAndShareItemId(Long memberId, Long shareItemId);
 }

@@ -25,24 +25,14 @@ public class ShareItemController {
 
     // GET
     @RequestMapping(
-            value = "/api/shareItem",
+            value = "/api/shareItem/{memberId}",
             method = RequestMethod.GET
     )
-    public ResponseEntity<List<ShareItemDto>> getShareItemAll() {
+    public ResponseEntity<List<ShareItemDto>> getShareItemAll(@PathVariable("memberId") Long memberId) {
         // ShareItem Entity List
-        List<ShareItem> shareItems = shareItemService.getShareItemAll();
-        int size = shareItems.size();
+        List<ShareItemDto> shareItemDtoList = shareItemService.getShareItemAll(memberId);
 
-        // TODO: 2020-04-18 Sevice로 옮기기 
-        // 반환될 ShareItem DTO List
-        List<ShareItemDto> shareItemDtos = new ArrayList<ShareItemDto>();
-
-        // ShareItem Entity -> DTO 변환
-        for(int i=0; i<size; i++) {
-            shareItemDtos.add(shareItems.get(i).entityToDto());
-        }
-
-        return ResponseEntity.ok(shareItemDtos);
+        return ResponseEntity.ok(shareItemDtoList);
     }
 
     @RequestMapping(

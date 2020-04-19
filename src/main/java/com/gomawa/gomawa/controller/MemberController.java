@@ -80,6 +80,7 @@ public class MemberController {
              */
             // TODO: 2020/04/15 converter를 통해 MemberDto로 전환하게 로직 수정 필요
             MemberDto memberDto = new MemberDto();
+            memberDto.setId(member.getId());
             memberDto.setEmail(member.getEmail());
             memberDto.setNickName(member.getNickName());
             memberDto.setGender(member.getGender());

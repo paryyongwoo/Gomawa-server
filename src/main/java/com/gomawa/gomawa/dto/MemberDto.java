@@ -3,6 +3,7 @@ package com.gomawa.gomawa.dto;
 import java.util.Date;
 
 public class MemberDto {
+    private Long id;
     // 네이버, 카카오 로그인에서 제공하는 식별자 id
     private Long key;
     // 이메일
@@ -20,13 +21,22 @@ public class MemberDto {
 
     }
 
-    public MemberDto(Long key, String email, String gender, String nickName, Date regDate, String profileImgUrl) {
+    public MemberDto(Long id, Long key, String email, String gender, String nickName, Date regDate, String profileImgUrl) {
+        this.id = id;
         this.key = key;
         this.email = email;
         this.gender = gender;
         this.nickName = nickName;
         this.regDate = regDate;
         this.profileImgUrl = profileImgUrl;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getKey() {

@@ -47,6 +47,6 @@ public class Member {
     }
 
     public MemberDto entityToDto() {
-        return new MemberDto(key, email, gender, nickName, regDate, profileImgUrl);
+        return new MemberDto(id, key, email, gender, nickName, regDate, profileImgUrl);
     }
 }
