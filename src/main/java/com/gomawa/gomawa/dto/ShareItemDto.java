@@ -11,7 +11,7 @@ public class ShareItemDto {
     // 글쓴이 key
     // private long key;
     // 글작성 시간
-    private Date date; // LocalDateTime이 지원하는 api레벨이 높아서 Date 객체를 사용.. String 고려..
+    private Date regDate; // LocalDateTime이 지원하는 api레벨이 높아서 Date 객체를 사용.. String 고려..
     // 글내용
     private String content;
     // 이미지 주소
@@ -25,30 +25,21 @@ public class ShareItemDto {
 
     }
 
-//    public ShareItemDto(long id, long key, Date date, String content, String backgroundUrl, int like) {
-//        this.id = id;
-//        this.key = key;
-//        this.date = date;
-//        this.content = content;
-//        this.backgroundUrl = backgroundUrl;
-//        this.like = like;
-//    }
-
-    public ShareItemDto(long id, MemberDto memberDto, Date date, String content, String backgroundUrl, int likeNum) {
+    public ShareItemDto(long id, MemberDto memberDto, Date regDate, String content, String backgroundUrl, int likeNum) {
         this.id = id;
         this.member = memberDto;
-        this.date = date;
+        this.regDate = regDate;
         this.content = content;
         this.backgroundUrl = backgroundUrl;
         this.likeNum = likeNum;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getRegDate() {
+        return regDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
     }
 
     public long getId() {
@@ -95,7 +86,7 @@ public class ShareItemDto {
     public String toString() {
         return "ShareItemDto{" +
                 "id=" + id +
-                ", date=" + date +
+                ", date=" + regDate +
                 ", content='" + content + '\'' +
                 ", backgroundUrl='" + backgroundUrl + '\'' +
                 ", likeNum=" + likeNum +

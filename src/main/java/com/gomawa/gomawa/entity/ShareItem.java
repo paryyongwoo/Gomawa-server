@@ -27,7 +27,7 @@ public class ShareItem {
     private String content;
 
     // 등록일
-    private Date regDate = new Date();
+    private Date regDate;
 
     // 업로드 이미지의 s3 url
     private String backgroundUrl;
