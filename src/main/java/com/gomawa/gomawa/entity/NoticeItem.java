@@ -1,14 +1,13 @@
 package com.gomawa.gomawa.entity;
 
+import com.gomawa.gomawa.dto.NoticeItemDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 @Entity @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
@@ -19,5 +18,9 @@ public class NoticeItem {
     private Long id;
     private String title;
     private String dsc;
-    private String date;
+    private Date regDate;
+
+    public NoticeItemDto entityToDto() {
+        return new NoticeItemDto(id, title, dsc, regDate);
+    }
 }

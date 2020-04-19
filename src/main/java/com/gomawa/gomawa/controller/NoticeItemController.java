@@ -1,5 +1,6 @@
 package com.gomawa.gomawa.controller;
 
+import com.gomawa.gomawa.dto.NoticeItemDto;
 import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.entity.NoticeItem;
 import com.gomawa.gomawa.service.MemberService;
@@ -32,13 +33,14 @@ public class NoticeItemController {
             value = "/api/notice",
             method = RequestMethod.GET
     ) // 모든 공지사항을 가져오는 메소드
-    public ResponseEntity getNoticeAll() {
+    public ResponseEntity<List<NoticeItemDto>> getNoticeAll() {
         try {
-            List<NoticeItem> noticeItems = noticeItemService.getNoticeAll();
-            return ResponseEntity.ok(noticeItems);
+            List<NoticeItemDto> noticeItemDtoList = noticeItemService.getNoticeAll();
+
+            return ResponseEntity.ok(noticeItemDtoList);
         } catch (Exception e) {
             e.printStackTrace();
-            // TODO: 2020-04-08 에러 메시지 추가
+
             return ResponseEntity.badRequest().build();
         }
     }
