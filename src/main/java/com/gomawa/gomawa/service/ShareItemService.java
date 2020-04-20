@@ -59,14 +59,26 @@ public class ShareItemService {
         Member member = memberRepository.findByKey(memberKey).orElse(null);
         if(member == null) { throw new Exception("member is null"); }
 
+        // TODO: 2020-04-20 memberKey -> memberId
+        Long memberId = member.getId();
+
         // Member 로 ShareItem List 가져오기
         List<ShareItem> shareItemList = shareItemRepository.findAllByMember(member);
         int size = shareItemList.size();
 
+
+
         // DTO 변환
         List<ShareItemDto> shareItemDtoList = new ArrayList<>();
         for(int i=0; i<size; i++) {
-            shareItemDtoList.add(shareItemList.get(i).entityToDto());
+            Long shareItemId = shareItemList.get(i).getId();
+            // isLike
+            boolean isLike = likeRepository.existsLikesByMemberIdAndShareItemId(memberId, shareItemId);
+            
+            ShareItemDto shareItemDto = shareItemList.get(i).entityToDto();
+            shareItemDto.setIsLike(isLike);
+
+            shareItemDtoList.add(shareItemDto);
         }
 
         return shareItemDtoList;
