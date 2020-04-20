@@ -1,5 +1,6 @@
 package com.gomawa.gomawa.service;
 
+import com.gomawa.gomawa.dto.ShareItemDto;
 import com.gomawa.gomawa.entity.Likes;
 import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.entity.ShareItem;
@@ -45,11 +46,21 @@ public class LikeService {
         }
 
         // 수정된 좋아요의 Count 가 포함된 ShareItem Entity - 클라이언트에서 View 의 설정을 위해
-        shareItem = shareItemRepository.findById(shareItemId).orElse(null);
-        if(shareItem == null) {
-            System.out.println("member is null");
-        }
+        ShareItem shareItemRe = shareItemRepository.findById(shareItemId).orElse(null);
 
-        return shareItem;
+        return shareItemRe;
+    }
+
+    // ShareItem ID 와 Member Key 로 해당 Member 가 좋아요를 눌렀는 지 확인하는 메소드
+    public boolean checkLike(Long memberKey, Long shareItemId) throws Exception {
+        // TODO: 2020-04-20 memberKey -> memberId
+        Member member = memberRepository.findByKey(memberKey).orElse(null);
+        if(member == null) { throw new Exception("member is null"); }
+
+        Long memberId = member.getId();
+
+        boolean isLike = likeRepository.existsLikesByMemberIdAndShareItemId(memberId, shareItemId);
+
+        return isLike;
     }
 }

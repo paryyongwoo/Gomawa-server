@@ -33,8 +33,10 @@ public class LikeController {
     public ResponseEntity<ShareItemDto> updateLike(@PathVariable("memberKey") Long memberKey, @PathVariable("shareItemId") Long shareItemId) {
         try {
             ShareItem shareItem = likeService.updateLike(memberKey, shareItemId);
+            boolean isLike = likeService.checkLike(memberKey, shareItemId);
 
             ShareItemDto shareItemDto = shareItem.entityToDto();
+            shareItemDto.setIsLike(isLike);
 
             return ResponseEntity.ok(shareItemDto);
         } catch(Exception e) {

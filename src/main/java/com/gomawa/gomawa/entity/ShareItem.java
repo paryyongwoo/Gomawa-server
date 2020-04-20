@@ -39,7 +39,7 @@ public class ShareItem {
 
     // 좋아요
     @OneToMany(mappedBy = "shareItem")
-    private List<Likes> likeList = new ArrayList();
+    private List<Likes> likeList = new ArrayList<>();
 
     // 댓글
     @OneToMany(mappedBy = "shareItem")
