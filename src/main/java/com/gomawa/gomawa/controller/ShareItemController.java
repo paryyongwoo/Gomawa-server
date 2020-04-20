@@ -25,7 +25,7 @@ public class ShareItemController {
 
     // GET
     @RequestMapping(
-            value = "/api/shareItem/{memberId}",
+            value = "/api/shareItems/{memberId}",
             method = RequestMethod.GET
     )
     public ResponseEntity<List<ShareItemDto>> getShareItemAll(@PathVariable("memberId") Long memberId) {
