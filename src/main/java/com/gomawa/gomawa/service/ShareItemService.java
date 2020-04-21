@@ -4,9 +4,11 @@ import com.gomawa.gomawa.aws.S3Service;
 import com.gomawa.gomawa.dto.ShareItemDto;
 import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.entity.ShareItem;
-import com.gomawa.gomawa.repository.MemberRepository;
 import com.gomawa.gomawa.repository.LikeRepository;
+import com.gomawa.gomawa.repository.MemberRepository;
 import com.gomawa.gomawa.repository.ShareItemRepository;
+import com.gomawa.gomawa.repository.ShareItemRepositorySupport;
+import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -37,15 +39,27 @@ public class ShareItemService {
     @Autowired
     private S3Service s3Service;
 
-    public List<ShareItemDto> getShareItemAll(Long memberId) {
+    @Autowired
+    ShareItemRepositorySupport shareItemRepositorySupport;
+
+    /**
+     * 전체 ShareItem 목록 가져오기
+     * @param memberId 접속한 사용자의 memberId
+     */
+    public List<ShareItemDto> getShareItemAll(Long memberId, int page) {
         // 반환될 ShareItem DTO List
         List<ShareItemDto> shareItemDtos = new ArrayList<>();
 
-        List<ShareItem> shareItems = shareItemRepository.findAll();
+        QueryResults<ShareItem> queryResults = shareItemRepositorySupport.findAll(page);
+        List<ShareItem> shareItems = queryResults.getResults();
         for (ShareItem shareItem : shareItems) {
+            /**
+             * 글목록 중에서 현재 접속한 사용자가 좋아요를 누른 게시글의 경우
+             * isLike = true로 넣어줌
+             */
             Long shareItemId = shareItem.getId();
             boolean isLike = likeRepository.existsLikesByMemberIdAndShareItemId(memberId, shareItemId);
-            System.out.println("isLike = " + isLike);
+
             ShareItemDto shareItemDto = shareItem.entityToDto();
             shareItemDto.setIsLike(isLike);
             shareItemDtos.add(shareItemDto);

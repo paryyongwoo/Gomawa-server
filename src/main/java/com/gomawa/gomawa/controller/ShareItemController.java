@@ -25,12 +25,12 @@ public class ShareItemController {
 
     // GET
     @RequestMapping(
-            value = "/api/shareItems/{memberId}",
+            value = "/api/shareItems/{memberId}/{page}",
             method = RequestMethod.GET
     )
-    public ResponseEntity<List<ShareItemDto>> getShareItemAll(@PathVariable("memberId") Long memberId) {
+    public ResponseEntity<List<ShareItemDto>> getShareItemAll(@PathVariable("memberId") Long memberId, @PathVariable("page") int page) {
         // ShareItem Entity List
-        List<ShareItemDto> shareItemDtoList = shareItemService.getShareItemAll(memberId);
+        List<ShareItemDto> shareItemDtoList = shareItemService.getShareItemAll(memberId, page);
 
         return ResponseEntity.ok(shareItemDtoList);
     }
