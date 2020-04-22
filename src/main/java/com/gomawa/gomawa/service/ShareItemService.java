@@ -64,6 +64,7 @@ public class ShareItemService {
             shareItemDto.setIsLike(isLike);
             shareItemDtos.add(shareItemDto);
         }
+        System.out.println("shareItems.size() = " + shareItems.size());
 
         return shareItemDtos;
     }

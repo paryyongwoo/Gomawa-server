@@ -27,7 +27,8 @@ public class ShareItemRepositorySupport extends QuerydslRepositorySupport {
     public QueryResults<ShareItem> findAll(int page) {
         QShareItem shareItem = QShareItem.shareItem;
         int offset = page * num;
-        int limit = ((page + 1) * num) - 1;
+        int limit = num;
+        System.out.println("limit = " + limit + ", offset = " + offset);
         return queryFactory.selectFrom(shareItem)
                 .orderBy(shareItem.regDate.desc())
                 .offset(offset)
