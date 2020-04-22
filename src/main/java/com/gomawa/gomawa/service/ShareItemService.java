@@ -151,4 +151,39 @@ public class ShareItemService {
 
         shareItemRepository.delete(shareItem);
     }
+
+    public void updateShareItem(MultipartFile file, String items) throws Exception {
+        JSONObject jsonObject = new JSONObject(items);
+
+        // ShareItem ID
+        String shareItemIdString = jsonObject.getString("id");
+        Long shareItemId = Long.parseLong(shareItemIdString);
+
+        // DB 에서 ShareItem 가져옴
+        ShareItem shareItem = shareItemRepository.findById(shareItemId).orElse(null);
+        if(shareItem == null) { throw new Exception("shareItem is null"); }
+
+        // ShareItem content
+        String shareItemContent = jsonObject.getString("content");
+
+        // ShareItem Background Url
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if(!(fileName.equals("Not Exist"))) {
+            // 수정할 때 이미지를 바꿨다면 ~
+            // Amazon 에 이미지 업로드
+            String imageUrl = s3Service.upload(file);
+            // Url 수정
+            shareItem.setBackgroundUrl(imageUrl);
+        }
+
+        // Data 수정 - regDate 를 현재 시각으로
+        shareItem.setContent(shareItemContent);
+        shareItem.setRegDate(new Date());
+
+        // 수정된 ShareItem 을 INSERT
+        shareItem = shareItemRepository.save(shareItem);
+
+        // DTO 변환
+        ShareItemDto shareItemDto = shareItem.entityToDto();
+    }
 }

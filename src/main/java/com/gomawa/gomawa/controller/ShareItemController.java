@@ -76,6 +76,26 @@ public class ShareItemController {
 
 
 
+    // PUT
+    @RequestMapping(
+            value = "/api/shareItem",
+            method = RequestMethod.PUT,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public ResponseEntity<Void> updateShareItem(@RequestParam("file") MultipartFile file, @RequestParam String items) {
+        try {
+            shareItemService.updateShareItem(file, items);
+
+            return ResponseEntity.ok().build();
+        } catch (Exception e ) {
+            e.printStackTrace();
+            // TODO: 2020/04/15 메시지 처리
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+
+
     // DELETE
     @RequestMapping(
             value = "/api/shareItem/{shareItemId}",
