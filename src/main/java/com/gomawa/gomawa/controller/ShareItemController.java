@@ -73,4 +73,23 @@ public class ShareItemController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+
+
+    // DELETE
+    @RequestMapping(
+            value = "/api/shareItem/{shareItemId}",
+            method = RequestMethod.DELETE
+    )
+    public ResponseEntity<Void> deleteShareItemById(@PathVariable("shareItemId") Long shareItemId) {
+        try {
+            shareItemService.deleteShareItemById(shareItemId);
+
+            return ResponseEntity.ok().build();
+        } catch(Exception e) {
+            e.printStackTrace();
+
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

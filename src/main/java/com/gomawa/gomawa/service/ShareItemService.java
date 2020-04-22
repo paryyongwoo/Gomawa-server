@@ -144,4 +144,11 @@ public class ShareItemService {
 
             return shareItemDto;
     }
+
+    public void deleteShareItemById(Long shareItemId) throws Exception {
+        ShareItem shareItem = shareItemRepository.findById(shareItemId).orElse(null);
+        if(shareItem == null) { throw new Exception("shareItem is null"); }
+
+        shareItemRepository.delete(shareItem);
+    }
 }
