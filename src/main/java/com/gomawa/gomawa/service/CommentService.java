@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -68,6 +69,16 @@ public class CommentService {
         CommentDto commentDto = commentFromDb.entityToDto();
 
         return commentDto;
+    }
+
+    public void updateComment(CommentDto commentDto) throws Exception {
+        Comment comment = commentRepository.findById(commentDto.getId()).orElse(null);
+        if(comment == null) { throw new Exception("comment is null"); }
+
+        comment.setContent(commentDto.getContent());
+        comment.setRegDate(new Date());
+
+        commentRepository.save(comment);
     }
 
     public void deleteCommentById(Long id) throws Exception {

@@ -60,6 +60,24 @@ public class CommentController {
 
     }
 
+    // PUT
+    @RequestMapping(
+            value = "/api/comment",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.PUT
+    )
+    public ResponseEntity<Void> updateComment(@RequestBody CommentDto commentDto) {
+        try {
+            commentService.updateComment(commentDto);
+
+            return ResponseEntity.ok().build();
+        } catch(Exception e) {
+            e.printStackTrace();
+
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     // DELETE
     @RequestMapping(
             value = "/api/comment/{id}",
