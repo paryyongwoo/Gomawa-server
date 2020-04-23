@@ -59,4 +59,21 @@ public class CommentController {
         }
 
     }
+
+    // DELETE
+    @RequestMapping(
+            value = "/api/comment/{id}",
+            method = RequestMethod.DELETE
+    )
+    public ResponseEntity<Void> deleteCommentById(@PathVariable("id") Long id) {
+        try {
+            commentService.deleteCommentById(id);
+
+            return ResponseEntity.ok().build();
+        } catch(Exception e) {
+            e.printStackTrace();
+
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

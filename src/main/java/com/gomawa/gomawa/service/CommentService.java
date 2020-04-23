@@ -69,4 +69,11 @@ public class CommentService {
 
         return commentDto;
     }
+
+    public void deleteCommentById(Long id) throws Exception {
+        Comment comment = commentRepository.findById(id).orElse(null);
+        if(comment == null) { throw new Exception("comment is null"); }
+
+        commentRepository.delete(comment);
+    }
 }
