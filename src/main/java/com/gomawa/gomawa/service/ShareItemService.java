@@ -2,6 +2,7 @@ package com.gomawa.gomawa.service;
 
 import com.gomawa.gomawa.aws.S3Service;
 import com.gomawa.gomawa.dto.ShareItemDto;
+import com.gomawa.gomawa.entity.Likes;
 import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.entity.ShareItem;
 import com.gomawa.gomawa.repository.LikeRepository;
@@ -92,6 +93,33 @@ public class ShareItemService {
             
             ShareItemDto shareItemDto = shareItemList.get(i).entityToDto();
             shareItemDto.setIsLike(isLike);
+
+            shareItemDtoList.add(shareItemDto);
+        }
+
+        return shareItemDtoList;
+    }
+
+    public List<ShareItemDto> getShareItemByLike(Long memberId) throws Exception {
+        Member member = memberRepository.findById(memberId).orElse(null);
+        if(member == null) { throw new Exception("member is null"); }
+
+        List<Likes> likesList = likeRepository.findAllByMember(member);
+
+        List<ShareItem> shareItemList = new ArrayList<>();
+
+        // 좋아요 Entity 에 저장된 ShareItem 을 List 에 저장
+        for(Likes likes : likesList) {
+            ShareItem shareItem = likes.getShareItem();
+            shareItemList.add(shareItem);
+        }
+
+        List<ShareItemDto> shareItemDtoList = new ArrayList<>();
+
+        for(ShareItem shareItem : shareItemList) {
+            // 애초에 좋아요 누른 ShareItem 들을 가져왔기 때문에 isLike 를 true 로 설정한다
+            ShareItemDto shareItemDto = shareItem.entityToDto();
+            shareItemDto.setIsLike(true);
 
             shareItemDtoList.add(shareItemDto);
         }

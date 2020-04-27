@@ -51,6 +51,22 @@ public class ShareItemController {
         }
     }
 
+    @RequestMapping(
+            value = "/api/shareItem/like/{memberId}",
+            method = RequestMethod.GET
+    )
+    public ResponseEntity<List<ShareItemDto>> getShareItemByLike(@PathVariable("memberId") Long memberId) {
+        try {
+            List<ShareItemDto> shareItemDtoList = shareItemService.getShareItemByLike(memberId);
+
+            return ResponseEntity.ok(shareItemDtoList);
+        } catch(Exception e) {
+            e.printStackTrace();
+
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     // POST
     /**
      * @param file 업로드 이미지 파일
