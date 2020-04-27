@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Service
+//@Service
 public class InitService implements CommandLineRunner {
 
     @Autowired
