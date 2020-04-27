@@ -10,6 +10,7 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -95,6 +96,25 @@ public class MemberController {
             Map<String, String> response = new HashMap<>();
             response.put("msg", e.getMessage());
             return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+    @RequestMapping(
+            value = "/api/member/profileImageUrl",
+            method = RequestMethod.PUT,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public ResponseEntity<MemberDto> updateMemberProfileImageUrl(@RequestParam("file") MultipartFile file, @RequestParam String items) {
+        try {
+            Member member = memberService.updateMemberProfileImageUrl(file, items);
+
+            MemberDto memberDto = member.entityToDto();
+
+            return ResponseEntity.ok(memberDto);
+        } catch(Exception e) {
+            e.printStackTrace();
+
+            return ResponseEntity.badRequest().build();
         }
     }
 

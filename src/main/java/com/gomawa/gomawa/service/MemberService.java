@@ -1,11 +1,16 @@
 package com.gomawa.gomawa.service;
 
+import com.gomawa.gomawa.aws.S3Service;
+import com.gomawa.gomawa.dto.MemberDto;
 import com.gomawa.gomawa.entity.Member;
 import com.gomawa.gomawa.repository.MemberRepository;
 import com.gomawa.gomawa.repository.ShareItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -18,6 +23,9 @@ public class MemberService {
 
     @Autowired
     ShareItemRepository shareItemRepository;
+
+    @Autowired
+    S3Service s3Service;
 
     /**
      * GET
@@ -70,6 +78,29 @@ public class MemberService {
 
             memberRepository.save(member);
         }
+
+        return member;
+    }
+
+    public Member updateMemberProfileImageUrl(MultipartFile file, String items) throws Exception {
+        JSONObject jsonObject = new JSONObject(items);
+
+        // Member ID
+        String memberIdString = jsonObject.getString("id");
+        Long memberId = Long.parseLong(memberIdString);
+
+        // Member Entity
+        Member member = memberRepository.findById(memberId).orElse(null);
+        if(member == null) { throw new Exception("member is null"); }
+
+        // Member Profile Image Url
+        String url = s3Service.upload(file);
+
+        // Member Entity Profile Image Url 수정
+        member.setProfileImgUrl(url);
+
+        // 수정된 Entity 를 INSERT
+        memberRepository.save(member);
 
         return member;
     }

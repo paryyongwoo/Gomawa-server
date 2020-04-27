@@ -210,9 +210,6 @@ public class ShareItemService {
         shareItem.setRegDate(new Date());
 
         // 수정된 ShareItem 을 INSERT
-        shareItem = shareItemRepository.save(shareItem);
-
-        // DTO 변환
-        ShareItemDto shareItemDto = shareItem.entityToDto();
+        shareItemRepository.save(shareItem);
     }
 }
