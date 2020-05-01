@@ -22,18 +22,21 @@ public class ShareItemDto {
     private MemberDto member;
     // 좋아요 클릭 여부
     private boolean isLike;
+    // 댓글 갯수
+    private int commentNum;
 
     public ShareItemDto() {
 
     }
 
-    public ShareItemDto(long id, MemberDto memberDto, Date regDate, String content, String backgroundUrl, int likeNum) {
+    public ShareItemDto(long id, MemberDto memberDto, Date regDate, String content, String backgroundUrl, int likeNum, int commentNum) {
         this.id = id;
         this.member = memberDto;
         this.regDate = regDate;
         this.content = content;
         this.backgroundUrl = backgroundUrl;
         this.likeNum = likeNum;
+        this.commentNum = commentNum;
     }
 
     public Date getRegDate() {
@@ -92,15 +95,24 @@ public class ShareItemDto {
         this.isLike = isLike;
     }
 
+    public int getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(int commentNum) {
+        this.commentNum = commentNum;
+    }
+
     @Override
     public String toString() {
         return "ShareItemDto{" +
                 "id=" + id +
-                ", date=" + regDate +
+                ", regDate=" + regDate +
                 ", content='" + content + '\'' +
                 ", backgroundUrl='" + backgroundUrl + '\'' +
                 ", likeNum=" + likeNum +
                 ", member=" + member +
+                ", commentNum=" + commentNum +
                 '}';
     }
 }

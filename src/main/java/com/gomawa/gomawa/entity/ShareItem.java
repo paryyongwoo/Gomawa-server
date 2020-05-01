@@ -49,6 +49,6 @@ public class ShareItem {
         // 연관관계에 있는 Member 역시 DTO 로 변환
         MemberDto memberDto = member.entityToDto();
 
-        return new ShareItemDto(id, memberDto, regDate, content, backgroundUrl, likeList.size());
+        return new ShareItemDto(id, memberDto, regDate, content, backgroundUrl, likeList.size(), commentList.size());
     }
 }
