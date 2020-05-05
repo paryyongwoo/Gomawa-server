@@ -3,10 +3,9 @@ package com.gomawa.gomawa.dto;
 import java.util.Date;
 
 public class DailyThanksDto {
+
     private Long id;
-    private String content1;
-    private String content2;
-    private String content3;
+    private String content;
     private Date regDate;
     private MemberDto regMember;
 
@@ -14,11 +13,9 @@ public class DailyThanksDto {
 
     }
 
-    public DailyThanksDto(Long id, String content1, String content2, String content3, Date regDate, MemberDto regMember) {
+    public DailyThanksDto(Long id, String content, Date regDate, MemberDto regMember) {
         this.id = id;
-        this.content1 = content1;
-        this.content2 = content2;
-        this.content3 = content3;
+        this.content = content;
         this.regDate = regDate;
         this.regMember = regMember;
     }
@@ -31,28 +28,12 @@ public class DailyThanksDto {
         this.id = id;
     }
 
-    public String getContent1() {
-        return content1;
+    public String getContent() {
+        return content;
     }
 
-    public void setContent1(String content1) {
-        this.content1 = content1;
-    }
-
-    public String getContent2() {
-        return content2;
-    }
-
-    public void setContent2(String content2) {
-        this.content2 = content2;
-    }
-
-    public String getContent3() {
-        return content3;
-    }
-
-    public void setContent3(String content3) {
-        this.content3 = content3;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getRegDate() {
@@ -75,10 +56,9 @@ public class DailyThanksDto {
     public String toString() {
         return "DailyThanks{" +
                 "id=" + id +
-                ", content1='" + content1 + '\'' +
-                ", content2='" + content2 + '\'' +
-                ", content3='" + content3 + '\'' +
+                ", content='" + content + '\'' +
                 ", regDate=" + regDate +
+                ", regMember=" + regMember +
                 '}';
     }
 }

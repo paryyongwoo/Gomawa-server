@@ -24,6 +24,18 @@ public class MyThanksService {
     private MemberRepository memberRepository;
 
     /**
+     * 접속한 사용자의 당일 DailyThanks를 가져오는 기능
+     * @param memberId 접속한 사용자의 id
+     * @return 당일 작성된 DailyThanks
+     */
+    public DailyThanksDto getDailyThanks(Long memberId) {
+        Optional<Member> optional = memberRepository.findById(memberId);
+        Member member = optional.orElseThrow();
+        DailyThanks dailyThanks = dailyThanksRepository.findByRegMember(member);
+        DailyThanksDto dailyThanksDto = dailyThanks.convertToDto();
+        return dailyThanksDto;
+    }
+    /**
      * DailyThnaks를 저장하는 기능
      */
     public DailyThanksDto addDailyThanks(DailyThanksDto dailyThanksDto) {
@@ -31,12 +43,10 @@ public class MyThanksService {
         Optional<Member> memberOptional = memberRepository.findByKey(memberDto.getKey());
         Member member = memberOptional.orElseThrow();
 
-        String content1 = dailyThanksDto.getContent1();
-        String content2 = dailyThanksDto.getContent2();
-        String content3 = dailyThanksDto.getContent3();
+        String content = dailyThanksDto.getContent();
         Date regDate = dailyThanksDto.getRegDate();
 
-        DailyThanks dailyThanks = new DailyThanks(content1, content2, content3, regDate, member);
+        DailyThanks dailyThanks = new DailyThanks(content, regDate, member);
         dailyThanksRepository.save(dailyThanks);
 
         DailyThanksDto savedDailyThanksDto = dailyThanks.convertToDto();

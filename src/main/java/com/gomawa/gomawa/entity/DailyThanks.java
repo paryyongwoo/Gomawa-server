@@ -17,20 +17,14 @@ public class DailyThanks {
     @Id @GeneratedValue
     private Long id;
     @Lob
-    private String content1;
-    @Lob
-    private String content2;
-    @Lob
-    private String content3;
+    private String content;
     private Date regDate;
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member regMember;
 
-    public DailyThanks(String content1, String content2, String content3, Date regDate, Member regMember) {
-        this.content1 = content1;
-        this.content2 = content2;
-        this.content3 = content3;
+    public DailyThanks(String content, Date regDate, Member regMember) {
+        this.content = content;
         this.regDate = regDate;
         this.regMember = regMember;
     }
@@ -39,16 +33,15 @@ public class DailyThanks {
     public String toString() {
         return "DailyThanks{" +
                 "id=" + id +
-                ", content1='" + content1 + '\'' +
-                ", content2='" + content2 + '\'' +
-                ", content3='" + content3 + '\'' +
+                ", content='" + content + '\'' +
                 ", regDate=" + regDate +
+                ", regMember=" + regMember +
                 '}';
     }
 
     public DailyThanksDto convertToDto() {
         MemberDto memberDto = this.regMember.entityToDto();
 
-        return new DailyThanksDto(this.id, this.content1, this.content2, this.content3, this.regDate, memberDto);
+        return new DailyThanksDto(this.id, this.content, this.regDate, memberDto);
     }
 }
