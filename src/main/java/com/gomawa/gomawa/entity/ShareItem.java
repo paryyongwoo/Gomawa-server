@@ -38,11 +38,11 @@ public class ShareItem {
     private Member member;
 
     // 좋아요
-    @OneToMany(mappedBy = "shareItem")
+    @OneToMany(mappedBy = "shareItem", cascade = CascadeType.REMOVE)
     private List<Likes> likeList = new ArrayList<>();
 
     // 댓글
-    @OneToMany(mappedBy = "shareItem")
+    @OneToMany(mappedBy = "shareItem", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
 
     public ShareItemDto entityToDto() {
