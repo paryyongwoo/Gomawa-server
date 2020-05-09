@@ -54,7 +54,7 @@ public class DailyThanksDto {
 
     @Override
     public String toString() {
-        return "DailyThanks{" +
+        return "DailyThanksDto{" +
                 "id=" + id +
                 ", content='" + content + '\'' +
                 ", regDate=" + regDate +

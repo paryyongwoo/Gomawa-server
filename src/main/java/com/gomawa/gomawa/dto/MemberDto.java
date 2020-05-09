@@ -13,7 +13,7 @@ public class MemberDto {
     // 닉네임
     private String nickName;
     // 최초 로그인 시각
-    private Date regDate;
+    private Date regDate = new Date();
     // 프로필 이미지 url
     private String profileImgUrl;
 

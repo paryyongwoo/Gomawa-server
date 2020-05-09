@@ -18,7 +18,7 @@ public class DailyThanks {
     private Long id;
     @Lob
     private String content;
-    private Date regDate;
+    private Date regDate = new Date();
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member regMember;
@@ -35,7 +35,6 @@ public class DailyThanks {
                 "id=" + id +
                 ", content='" + content + '\'' +
                 ", regDate=" + regDate +
-                ", regMember=" + regMember +
                 '}';
     }
 
