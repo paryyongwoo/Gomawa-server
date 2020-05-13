@@ -8,7 +8,7 @@ EXPOSE 8080
 ARG JAR_FILE=gomawa-0.0.1-SNAPSHOT.jar
 
 # Add the application's jar to the container
-ADD ${JAR_FILE} gomawa-0.0.1-SNAPSHOT.jar
+ADD ./target/${JAR_FILE} gomawa-0.0.1-SNAPSHOT.jar
 
 # Run the jar file
 ENTRYPOINT ["java","-jar","/gomawa-0.0.1-SNAPSHOT.jar"]
